@@ -17,7 +17,7 @@ public class RouletteApiManager : SingletonMonoBehaviour<RouletteApiManager>
 
     public void GetConsumeRouletteItem(Action<bool> onConsumeComplete)
     {
-        GetRemainedItems(onConsumeComplete);
+        StartCoroutine(GetRemainedItems(onConsumeComplete));
     }
 
     public void PostConsumeRouletteItem(Item selectedItem, Action<bool> onConsumeComplete)
@@ -62,6 +62,7 @@ public class RouletteApiManager : SingletonMonoBehaviour<RouletteApiManager>
 
     public IEnumerator ConsumeRouletteItem(string itemName, Action<bool> onConsumeComplete)
     {
+        Debug.Log("consume item : " + itemName);
         string url = $"{baseUrl}/consume";
 
         // JSON 데이터 준비

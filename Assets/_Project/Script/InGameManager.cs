@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using TMPro;
 using Random = UnityEngine.Random;
 
 public enum RouletteState
@@ -13,16 +14,17 @@ public enum RouletteState
     Result, // 결과 표시 중
 }
 
-public class InGameManager : Singleton<InGameManager>
+public class InGameManager : SingletonMonoBehaviour<InGameManager>
 {
-    public RouletteState _currentState = RouletteState.Idle;
-    public Button _spinButton;
-    public GameObject _rewardPopup;
-    public Text _descText;
-    public Text _titleText;
-    public Image _selectedItemImage;
-    public Animator _rouletteAnimator;
-    public Item _selectedItem;
+    [SerializeField] private Button _spinButton;
+    [SerializeField] private GameObject _rewardPopup;
+    [SerializeField] private TextMeshProUGUI _descText;
+    [SerializeField] private TextMeshProUGUI _titleText;
+    [SerializeField] private Image _selectedItemImage;
+    [SerializeField] private Animator _rouletteAnimator;
+
+    private RouletteState _currentState = RouletteState.Idle;
+    private Item _selectedItem;
 
     public void OnClickPressedButton()
     {
@@ -32,6 +34,7 @@ public class InGameManager : Singleton<InGameManager>
     public void OnClickResultButton()
     {
         _rewardPopup.SetActive(false);
+        UpdateState(RouletteState.Idle);
     }
 
     protected void Start()
@@ -47,15 +50,20 @@ public class InGameManager : Singleton<InGameManager>
         switch (_currentState)
         {
             case RouletteState.Idle:
-                UpdateState(RouletteState.Idle);
-                _rouletteAnimator.SetTrigger("ReStart");
+                _rouletteAnimator.SetTrigger("Restart");
                 RouletteApiManager.Instance.GetConsumeRouletteItem((onComplete) =>
                 {
                     if (onComplete)
                     {
                         bool isExistsItem = RouletteApiManager.Instance.CachedItems.Exists(l => l.count > 0);
                         if (isExistsItem)
+                        {
                             _spinButton.interactable = true;
+                            _selectedItem = GetRandomItemByWeight();
+
+                            int findIndex = RouletteApiManager.Instance.CachedItems.FindIndex(l => l.name == _selectedItem.name);
+                            _rouletteAnimator.SetInteger("Number", findIndex);
+                        }
                         else
                         {
                             // [TODO] 현재 상품이 모두 소진되었습니다.
@@ -66,11 +74,9 @@ public class InGameManager : Singleton<InGameManager>
                 break;
             case RouletteState.Spinning:
                 _spinButton.interactable = false;
-                _selectedItem = GetRandomItemByWeight();
 
                 _rouletteAnimator.SetTrigger("Start");
-                // 룰렛 시작
-                // 상태 변경 : 끝난 후 Result로 옮기기
+                // 상태 변경 : ChangeStateToResult()
                 break;
             case RouletteState.Result:
                 _spinButton.interactable = false;
@@ -127,5 +133,10 @@ public class InGameManager : Singleton<InGameManager>
         }
 
         return null;
+    }
+
+    public void ChangeStateToResult()
+    {
+        UpdateState(RouletteState.Result);
     }
 }

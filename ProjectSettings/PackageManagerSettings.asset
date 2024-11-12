@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EnablePreReleasePackages: 0
+  m_EnablePackageDependencies: 0
   m_AdvancedSettingsExpanded: 1
   m_ScopedRegistriesSettingsExpanded: 1
   m_SeeAllPackageVersions: 0
-  m_DismissPreviewPackagesInUse: 0
   oneTimeWarningShown: 0
   m_Registries:
   - m_Id: main
@@ -25,16 +25,14 @@ MonoBehaviour:
     m_Scopes: []
     m_IsDefault: 1
     m_Capabilities: 7
-    m_ConfigSource: 0
-  - m_Id: scoped:project:CookApps
+  - m_Id: scoped:CookApps
     m_Name: CookApps
     m_Url: https://packages.tech.cookapps.com
     m_Scopes:
     - com.cookapps
     m_IsDefault: 0
     m_Capabilities: 0
-    m_ConfigSource: 4
-  - m_Id: scoped:project:OpenUPM
+  - m_Id: scoped:OpenUPM
     m_Name: OpenUPM
     m_Url: https://package.openupm.com
     m_Scopes:
@@ -42,12 +40,11 @@ MonoBehaviour:
     - com.azixmcaze.unityserializabledictionary
     m_IsDefault: 0
     m_Capabilities: 0
-    m_ConfigSource: 4
-  m_UserSelectedRegistryName: OpenUPM
+  m_UserSelectedRegistryName: CookApps
   m_UserAddingNewScopedRegistry: 0
   m_RegistryInfoDraft:
     m_Modified: 0
     m_ErrorMessage: 
-    m_UserModificationsInstanceId: -834
-    m_OriginalInstanceId: -838
+    m_UserModificationsInstanceId: -830
+    m_OriginalInstanceId: -834
   m_LoadAssets: 0
