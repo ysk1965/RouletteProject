@@ -53,9 +53,16 @@ public class InGameManager : Singleton<InGameManager>
                 {
                     if (onComplete)
                     {
-                        _spinButton.interactable = true;
+                        bool isExistsItem = RouletteApiManager.Instance.CachedItems.Exists(l => l.count > 0);
+                        if (isExistsItem)
+                            _spinButton.interactable = true;
+                        else
+                        {
+                            // [TODO] 현재 상품이 모두 소진되었습니다.
+                        }
                     }
                 });
+                // 상태 변경 : OnClickPressedButton()
                 break;
             case RouletteState.Spinning:
                 _spinButton.interactable = false;
@@ -63,7 +70,7 @@ public class InGameManager : Singleton<InGameManager>
 
                 _rouletteAnimator.SetTrigger("Start");
                 // 룰렛 시작
-                // 끝난 후 Result로 옮기기
+                // 상태 변경 : 끝난 후 Result로 옮기기
                 break;
             case RouletteState.Result:
                 _spinButton.interactable = false;
@@ -73,11 +80,8 @@ public class InGameManager : Singleton<InGameManager>
                     {
                         _rewardPopup.SetActive(true);
                     }
-                    else
-                    {
-                        // [TODO] 여기서 오류났을 때 처리
-                    }
                 });
+                // 상태 변경 : OnClickResultButton()
                 break;
         }
     }
