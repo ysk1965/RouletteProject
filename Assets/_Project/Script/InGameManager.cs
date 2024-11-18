@@ -22,6 +22,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private Image _selectedItemImage;
     [SerializeField] private Animator _rouletteAnimator;
+    [SerializeField] private Animator _uiAnimator;
 
     private RouletteState _currentState = RouletteState.Idle;
     private Item _selectedItem;
@@ -76,10 +77,12 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 _spinButton.interactable = false;
 
                 _rouletteAnimator.SetTrigger("Start");
+                _uiAnimator.SetTrigger("Start");
                 // 상태 변경 : ChangeStateToResult()
                 break;
             case RouletteState.Result:
                 _spinButton.interactable = false;
+                _uiAnimator.SetTrigger("Restart");
                 RouletteApiManager.Instance.PostConsumeRouletteItem(_selectedItem, (onComplete) =>
                 {
                     if (onComplete)

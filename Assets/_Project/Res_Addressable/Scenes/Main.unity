@@ -653,6 +653,7 @@ MonoBehaviour:
   _titleText: {fileID: 1145016498}
   _selectedItemImage: {fileID: 388253572}
   _rouletteAnimator: {fileID: 2085088297}
+  _uiAnimator: {fileID: 961917610}
 --- !u!1001 &223102502
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1325,6 +1326,41 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1999881691881954223, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999881691881954223, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999881691881954223, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999881691881954223, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999881691881954223, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999881691881954223, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1999881691881954223, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 2389392982881763562, guid: 5d38df941e0055947ac2afcced3bce8e,
         type: 3}
       propertyPath: m_IsActive
@@ -1378,7 +1414,7 @@ PrefabInstance:
     - target: {fileID: 3597585131792229241, guid: 5d38df941e0055947ac2afcced3bce8e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 17.83
       objectReference: {fileID: 0}
     - target: {fileID: 3597585131792229241, guid: 5d38df941e0055947ac2afcced3bce8e,
         type: 3}
@@ -1460,10 +1496,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7571976629781479444, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8743193730510345598, guid: 5d38df941e0055947ac2afcced3bce8e,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834900400297640770, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.669129
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834900400297640770, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834900400297640770, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834900400297640770, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7431463
+      objectReference: {fileID: 0}
+    - target: {fileID: 8834900400297640770, guid: 5d38df941e0055947ac2afcced3bce8e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 5304
       objectReference: {fileID: 0}
     - target: {fileID: 9109581105037961847, guid: 5d38df941e0055947ac2afcced3bce8e,
         type: 3}
@@ -1872,7 +1938,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 89534951872d45240a5d7c1ef65771a9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.06
+      value: 16.77
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 89534951872d45240a5d7c1ef65771a9,
         type: 3}
@@ -2013,17 +2079,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 2428c153ebd933f429bf3bda3c6907c5,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2428c153ebd933f429bf3bda3c6907c5,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2428c153ebd933f429bf3bda3c6907c5,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2428c153ebd933f429bf3bda3c6907c5,
         type: 3}
@@ -2110,7 +2176,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &959556228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2184,6 +2250,7 @@ GameObject:
   - component: {fileID: 961917607}
   - component: {fileID: 961917609}
   - component: {fileID: 961917608}
+  - component: {fileID: 961917610}
   m_Layer: 5
   m_Name: HudCanvas
   m_TagString: Untagged
@@ -2251,6 +2318,26 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!95 &961917610
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961917606}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b2721761964a11c4c9d923e2bf6e10f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1084218992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,7 +3131,7 @@ MonoBehaviour:
   isBlockDrag: 0
   useDefaultClickSound: 1
   defaultClickSoundType: 0
-  reactionType: 0
+  reactionType: 12
 --- !u!222 &1643885659
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3796,4 +3883,4 @@ MonoBehaviour:
   isBlockDrag: 0
   useDefaultClickSound: 1
   defaultClickSoundType: 0
-  reactionType: 0
+  reactionType: 12
