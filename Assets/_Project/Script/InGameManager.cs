@@ -17,12 +17,14 @@ public enum RouletteState
 public class InGameManager : SingletonMonoBehaviour<InGameManager>
 {
     [SerializeField] private Button _spinButton;
-    [SerializeField] private GameObject _rewardPopup;
     [SerializeField] private TextMeshProUGUI _descText;
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private Image _selectedItemImage;
     [SerializeField] private Animator _rouletteAnimator;
     [SerializeField] private Animator _uiAnimator;
+    [SerializeField] private Animator _popupAnimator;
+
+    [SerializeField] private List<Sprite> _sprites;
 
     private RouletteState _currentState = RouletteState.Idle;
     private Item _selectedItem;
@@ -34,7 +36,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
 
     public void OnClickResultButton()
     {
-        _rewardPopup.SetActive(false);
+        _popupAnimator.SetTrigger("PopupClose");
         UpdateState(RouletteState.Idle);
     }
 
@@ -87,7 +89,9 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 {
                     if (onComplete)
                     {
-                        _rewardPopup.SetActive(true);
+                        _popupAnimator.SetTrigger("PopupOpen");
+                        int findIndex = RouletteApiManager.Instance.CachedItems.FindIndex(l => l.name == _selectedItem.name);
+                        SetPopUp(findIndex);
                     }
                 });
                 // 상태 변경 : OnClickResultButton()
@@ -101,6 +105,13 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         {
             UpdateState(RouletteState.Spinning);
         }
+    }
+
+    private void SetPopUp(int findIndex)
+    {
+        _titleText.text = "타이틀 텍스트";
+        _descText.text = "설명 텍스트";
+        // _selectedItemImage.sprite = _sprites[findIndex];
     }
 
     public Item GetRandomItemByWeight()
