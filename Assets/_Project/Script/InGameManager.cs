@@ -18,14 +18,18 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
 {
     [SerializeField] private Button _spinButton;
     [SerializeField] private GameObject _rewardPopup;
-    [SerializeField] private TextMeshProUGUI _descText;
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private Image _selectedItemImage;
     [SerializeField] private Animator _rouletteAnimator;
     [SerializeField] private Animator _uiAnimator;
 
+    [SerializeField]
+    private List<Sprite> _imageList;
+
     private RouletteState _currentState = RouletteState.Idle;
     private Item _selectedItem;
+
+    private int _findIndex;
 
     public void OnClickPressedButton()
     {
@@ -62,8 +66,8 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                             _spinButton.interactable = true;
                             _selectedItem = GetRandomItemByWeight();
 
-                            int findIndex = RouletteApiManager.Instance.CachedItems.FindIndex(l => l.name == _selectedItem.name);
-                            _rouletteAnimator.SetInteger("Number", findIndex);
+                            _findIndex = RouletteApiManager.Instance.CachedItems.FindIndex(l => l.name == _selectedItem.name);
+                            _rouletteAnimator.SetInteger("Number", _findIndex);
                         }
                         else
                         {
@@ -83,6 +87,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
             case RouletteState.Result:
                 _spinButton.interactable = false;
                 _uiAnimator.SetTrigger("Restart");
+                UpdatePopUp(_findIndex);
                 RouletteApiManager.Instance.PostConsumeRouletteItem(_selectedItem, (onComplete) =>
                 {
                     if (onComplete)
@@ -141,5 +146,33 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     public void ChangeStateToResult()
     {
         UpdateState(RouletteState.Result);
+    }
+
+    // 0 : 담요
+    // 1 : 스티커
+    // 2 : 엽서
+    // 3 : 인생네컷
+    private void UpdatePopUp(int findIndex)
+    {
+        switch (findIndex)
+        {
+            case 0 :
+                _titleText.text = "담요";
+                _selectedItemImage.sprite = _imageList[0];
+                break;
+            case 1 :
+                _titleText.text = "스티커";
+                _selectedItemImage.sprite = _imageList[1];
+                break;
+            case 2 :
+                _titleText.text = "엽서";
+                _selectedItemImage.sprite = _imageList[2];
+                break;
+            case 3 :
+                _titleText.text = "인생네컷";
+                _selectedItemImage.sprite = _imageList[3];
+                break;
+
+        }
     }
 }
