@@ -17,7 +17,6 @@ public enum RouletteState
 public class InGameManager : SingletonMonoBehaviour<InGameManager>
 {
     [SerializeField] private Button _spinButton;
-    [SerializeField] private TextMeshProUGUI _descText;
     [SerializeField] private TextMeshProUGUI _titleText;
     [SerializeField] private Image _selectedItemImage;
     [SerializeField] private Animator _rouletteAnimator;
@@ -109,9 +108,25 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
 
     private void SetPopUp(int findIndex)
     {
-        _titleText.text = "타이틀 텍스트";
-        _descText.text = "설명 텍스트";
-        // _selectedItemImage.sprite = _sprites[findIndex];
+        switch (findIndex)
+        {
+            case 0 :
+                _titleText.text = "담요";
+                _selectedItemImage.sprite = _sprites[findIndex];
+                break;
+            case 1 :
+                _titleText.text = "스티커";
+                _selectedItemImage.sprite = _sprites[findIndex];
+                break;
+            case 2 :
+                _titleText.text = "엽서";
+                _selectedItemImage.sprite = _sprites[findIndex];
+                break;
+            case 3 :
+                _titleText.text = "인생네컷";
+                _selectedItemImage.sprite = _sprites[findIndex];
+                break;
+        }
     }
 
     public Item GetRandomItemByWeight()
