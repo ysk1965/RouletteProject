@@ -30,6 +30,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     [SerializeField] private AudioSource _resultSfx;
     [SerializeField] private AudioSource _rouletteStartSfx;
     [SerializeField] private AudioSource _rouletteEndSfx;
+    [SerializeField] private AudioSource _bgm;
 
     [SerializeField] private ParticleSystem _vfx;
 
@@ -62,6 +63,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         switch (_currentState)
         {
             case RouletteState.Idle:
+                _bgm.Play();
                 _rouletteAnimator.SetTrigger("Restart");
                 RouletteApiManager.Instance.GetConsumeRouletteItem((onComplete) =>
                 {
@@ -85,6 +87,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 // 상태 변경 : OnClickPressedButton()
                 break;
             case RouletteState.Spinning:
+                _bgm.Stop();
                 _vfx.Play();
                 _rouletteStartSfx.Play();
                 _spinButton.interactable = false;
