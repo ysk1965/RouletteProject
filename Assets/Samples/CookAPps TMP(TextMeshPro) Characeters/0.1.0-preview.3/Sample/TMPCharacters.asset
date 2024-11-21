@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7798d5b896c438f81a7a80a1b852544, type: 3}
+  m_Name: TMPCharacters
+  m_EditorClassIdentifier: 
+  _tmpCharacters:
+  - _isBakeOnBuild: 1
+    _fontAsset: {fileID: 11400000, guid: 22c955861ba1f35479762a454d5086c3, type: 2}
+    _character: "\uD310\uAD50 \uB300\uC655\uD310\uAD50\uB85C"
+    _textAssets:
+    - {fileID: 4900000, guid: df43c82cce71b4243a7fded05b6c7892, type: 3}
+    - {fileID: 4900000, guid: 61de88fc8d02e9f4c8e677a0e2c88e19, type: 3}
+  - _isBakeOnBuild: 1
+    _fontAsset: {fileID: 11400000, guid: 711d91adf1c63d14a80f8199c84c0ea1, type: 2}
+    _character: Pangyo Daewangpangyo-ro
+    _textAssets:
+    - {fileID: 4900000, guid: 55af55c9bb0317e44a958f925500af36, type: 3}

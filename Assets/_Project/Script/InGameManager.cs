@@ -25,18 +25,26 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
 
     [SerializeField] private List<Sprite> _sprites;
 
+    [SerializeField] private AudioSource _clickSfx;
+    [SerializeField] private AudioSource _pinSoundSfx;
+    [SerializeField] private AudioSource _resultSfx;
+    [SerializeField] private AudioSource _rouletteStartSfx;
+    [SerializeField] private AudioSource _rouletteEndSfx;
+
     private RouletteState _currentState = RouletteState.Idle;
     private Item _selectedItem;
 
     public void OnClickPressedButton()
     {
         UpdateState(RouletteState.Spinning);
+        _clickSfx.Play();
     }
 
     public void OnClickResultButton()
     {
         _popupAnimator.SetTrigger("PopupClose");
         UpdateState(RouletteState.Idle);
+        _clickSfx.Play();
     }
 
     protected void Start()
@@ -75,6 +83,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 // 상태 변경 : OnClickPressedButton()
                 break;
             case RouletteState.Spinning:
+                _rouletteStartSfx.Play();
                 _spinButton.interactable = false;
 
                 _rouletteAnimator.SetTrigger("Start");
@@ -82,6 +91,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 // 상태 변경 : ChangeStateToResult()
                 break;
             case RouletteState.Result:
+                _rouletteEndSfx.Play();
                 _spinButton.interactable = false;
                 _uiAnimator.SetTrigger("Restart");
                 RouletteApiManager.Instance.PostConsumeRouletteItem(_selectedItem, (onComplete) =>
