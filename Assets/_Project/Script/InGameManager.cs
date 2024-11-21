@@ -31,6 +31,8 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     [SerializeField] private AudioSource _rouletteStartSfx;
     [SerializeField] private AudioSource _rouletteEndSfx;
 
+    [SerializeField] private ParticleSystem _vfx;
+
     private RouletteState _currentState = RouletteState.Idle;
     private Item _selectedItem;
 
@@ -83,6 +85,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 // 상태 변경 : OnClickPressedButton()
                 break;
             case RouletteState.Spinning:
+                _vfx.Play();
                 _rouletteStartSfx.Play();
                 _spinButton.interactable = false;
 
@@ -100,6 +103,7 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                     {
                         _popupAnimator.SetTrigger("PopupOpen");
                         int findIndex = RouletteApiManager.Instance.CachedItems.FindIndex(l => l.name == _selectedItem.name);
+                        Debug.Log( findIndex + " / " + _selectedItem.name);
                         SetPopUp(findIndex);
                     }
                 });
@@ -125,15 +129,23 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 _selectedItemImage.sprite = _sprites[findIndex];
                 break;
             case 1 :
-                _titleText.text = "스티커";
+                _titleText.text = "인생네컷";
                 _selectedItemImage.sprite = _sprites[findIndex];
                 break;
             case 2 :
-                _titleText.text = "엽서";
+                _titleText.text = "스티커";
                 _selectedItemImage.sprite = _sprites[findIndex];
                 break;
             case 3 :
-                _titleText.text = "인생네컷";
+                _titleText.text = "엽서";
+                _selectedItemImage.sprite = _sprites[findIndex];
+                break;
+            case 4 :
+                _titleText.text = "한번더";
+                _selectedItemImage.sprite = _sprites[findIndex];
+                break;
+            case 5 :
+                _titleText.text = "다음기회에";
                 _selectedItemImage.sprite = _sprites[findIndex];
                 break;
         }
