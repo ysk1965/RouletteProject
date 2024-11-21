@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb2d13885bee054b97c60f931f1317e, type: 3}
+  m_Name: SpriteAtlasSO
+  m_EditorClassIdentifier: 
+  SpriteAtlasDic:
+    _serializedList:
+    - Key: Characters
+      Value: {fileID: 100100200, guid: 33401eb1d3c3a9f42889d25a147509a2, type: 3}
+    - Key: Backgrounds
+      Value: {fileID: 100100200, guid: c31cdaa8c0d7e004f9ef7f2952976fda, type: 3}
+    - Key: MapElements
+      Value: {fileID: 100100200, guid: d378f375be039844b91db15fa057b12d, type: 3}
+    - Key: Snakes
+      Value: {fileID: 100100200, guid: 7b309b9788a2d4b4cae251044707c14a, type: 3}
+    - Key: UI_Main
+      Value: {fileID: 100100200, guid: 13e47b988a56a774492c4dd01ce80f4c, type: 3}
+    - Key: SocialProfile
+      Value: {fileID: 100100200, guid: 618e5b1ac4197c14f9c8154190091bd3, type: 3}
