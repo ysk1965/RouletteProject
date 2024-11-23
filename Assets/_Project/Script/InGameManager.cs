@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using Random = UnityEngine.Random;
 
@@ -30,9 +31,12 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
     [SerializeField] private AudioSource _resultSfx;
     [SerializeField] private AudioSource _rouletteStartSfx;
     [SerializeField] private AudioSource _rouletteEndSfx;
+    [SerializeField] private AudioSource _rouletteEndSpecialSfx;
     [SerializeField] private AudioSource _bgm;
 
     [SerializeField] private ParticleSystem _vfx;
+
+    [SerializeField] private TextMeshProUGUI _number;
 
     private RouletteState _currentState = RouletteState.Idle;
     private Item _selectedItem;
@@ -49,6 +53,26 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
         UpdateState(RouletteState.Idle);
         _clickSfx.Play();
     }
+
+        void Update()
+        {
+            if (_currentState == RouletteState.Idle)
+            {
+                // 리모컨에서 "이전 슬라이드" 키 (예: PageUp) 확인
+                if (Input.GetKeyDown(KeyCode.PageUp))
+                {
+                    OnClickPressedButton();
+                }
+            }
+            else if (_currentState == RouletteState.Result)
+            {
+                // 리모컨에서 "다음 슬라이드" 키 (예: PageDown) 확인
+                if (Input.GetKeyDown(KeyCode.PageDown))
+                {
+                    OnClickResultButton();
+                }
+            }
+        }
 
     protected void Start()
     {
@@ -69,6 +93,9 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 {
                     if (onComplete)
                     {
+                        int weightSum = RouletteApiManager.Instance.CachedItems.Sum(l => l.weight);
+                        int countSum = RouletteApiManager.Instance.CachedItems.Sum(l => l.count);
+                        _number.text = $"{countSum.ToString("n0")}/{weightSum.ToString("n0")}";
                         bool isExistsItem = RouletteApiManager.Instance.CachedItems.Exists(l => l.count > 0);
                         if (isExistsItem)
                         {
@@ -87,29 +114,29 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
                 // 상태 변경 : OnClickPressedButton()
                 break;
             case RouletteState.Spinning:
-                _bgm.Stop();
-                _vfx.Play();
-                _rouletteStartSfx.Play();
-                _spinButton.interactable = false;
-
-                _rouletteAnimator.SetTrigger("Start");
-                _uiAnimator.SetTrigger("Start");
-                // 상태 변경 : ChangeStateToResult()
-                break;
-            case RouletteState.Result:
-                _rouletteEndSfx.Play();
-                _spinButton.interactable = false;
-                _uiAnimator.SetTrigger("Restart");
                 RouletteApiManager.Instance.PostConsumeRouletteItem(_selectedItem, (onComplete) =>
                 {
                     if (onComplete)
                     {
-                        _popupAnimator.SetTrigger("PopupOpen");
-                        int findIndex = RouletteApiManager.Instance.CachedItems.FindIndex(l => l.name == _selectedItem.name);
-                        Debug.Log( findIndex + " / " + _selectedItem.name);
-                        SetPopUp(findIndex);
+                        _bgm.Stop();
+                        _vfx.Play();
+                        _rouletteStartSfx.Play();
+                        _spinButton.interactable = false;
+
+                        _rouletteAnimator.SetTrigger("Start");
+                        _uiAnimator.SetTrigger("Start");
                     }
                 });
+                // 상태 변경 : ChangeStateToResult()
+                break;
+            case RouletteState.Result:
+                int findIndex = RouletteApiManager.Instance.CachedItems.FindIndex(l => l.name == _selectedItem.name);
+                _spinButton.interactable = false;
+                _uiAnimator.SetTrigger("Restart");
+
+                _popupAnimator.SetTrigger("PopupOpen");
+                Debug.Log( findIndex + " / " + _selectedItem.name);
+                SetPopUp(findIndex);
                 // 상태 변경 : OnClickResultButton()
                 break;
         }
@@ -125,6 +152,14 @@ public class InGameManager : SingletonMonoBehaviour<InGameManager>
 
     private void SetPopUp(int findIndex)
     {
+
+        bool isSpecial = findIndex < 4;
+        if(isSpecial)
+            _rouletteEndSpecialSfx.Play();
+        else
+            _rouletteEndSfx.Play();
+
+
         switch (findIndex)
         {
             case 0 :
